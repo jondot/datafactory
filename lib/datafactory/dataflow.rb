@@ -37,7 +37,10 @@ module Datafactory
       connector(domain).create_db
     end
 
-    def profiled(meth)
+    def up; end
+    def down; end
+    
+    def run!(meth)
       tagline = "===== #{meth}: #{self.class.name} "
       log.info(tagline + "="*(63-tagline.length))
       b = Benchmark.measure do
@@ -46,8 +49,6 @@ module Datafactory
       log.info("===== took: #{b.to_s.chomp} =====")
       log.info("")
     end
-    def up; end
-    def down; end
 
   private
     def connector(domain)

@@ -9,13 +9,13 @@ module Datafactory
     desc "up [DOMAIN]", "Load data for domain"
     def up(domain)
       flow = get_flow(domain)
-      flow.profiled(:down)
-      flow.profiled(:up)
+      flow.run!(:down)
+      flow.run!(:up)
     end
 
     desc "down [DOMAIN]", "Load data for domain"
     def down(domain)
-      get_flow(domain).profiled(:down)
+      get_flow(domain).run!(:down)
     end
 
     method_option :connector
