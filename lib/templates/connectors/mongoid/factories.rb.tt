@@ -1,0 +1,8 @@
+FactoryGirl.define do
+  factory :user, class: <%= @namespace %>::User do
+    name  { Faker::Name.name }
+    email { Faker::Internet.email }
+    admin false
+  end
+end
+

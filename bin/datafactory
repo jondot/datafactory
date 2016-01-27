@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "datafactory/cli"
+
+Datafactory::Cli.start

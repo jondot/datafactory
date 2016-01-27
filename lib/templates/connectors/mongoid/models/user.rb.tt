@@ -1,0 +1,10 @@
+module <%= @namespace %>
+  class User
+    include Mongoid::Document 
+    field :name
+    field :email
+    field :admin
+  end 
+end
+
+

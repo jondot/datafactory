@@ -1,0 +1,22 @@
+require 'datafactory/dataflow'
+
+class <%= @flowname.capitalize %>
+  include Datafactory::Dataflow
+
+  def up
+    use :billing
+    users = create_list(:user, 20)
+    puts users
+  end
+
+  def down
+    use :billing
+    Billing::User.delete_all
+  end
+end
+
+
+
+
+
+

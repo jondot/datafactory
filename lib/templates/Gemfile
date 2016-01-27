@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'datafactory'
+gem 'pg'
+
+# add any additional adapter you need that is supported by either
+# ActiveRecord, sequel or mongoid.
+#
+# gem 'mysql2'
+# gem 'sqlite3'
+# gem 'tinytds'
+# ...

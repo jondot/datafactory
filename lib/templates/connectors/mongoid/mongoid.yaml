@@ -1,0 +1,7 @@
+development:
+  clients:
+    default:
+      uri: mongodb://foo:bar@localhost:39135/database
+
+
+

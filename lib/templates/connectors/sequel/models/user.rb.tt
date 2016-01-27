@@ -1,0 +1,4 @@
+module <%= @namespace %>
+  class User < Sequel::Model(:users)
+  end
+end
