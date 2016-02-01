@@ -1,21 +1,62 @@
-# tiny-cli-ruby-gem
+# Datafactory
 
-A transforming template repo to make CLIs in Ruby.
-CLI is based on the lightweight `slop` and has testing and fixtures built in.
+Build elegant scenarios that generate load a ton of data (fake or real) into various databases and tables. Supports ActiveRecord, Sequel and Mongoid.
+
 
 ## Quickstart
 
-Once you run `rake provision` on this repo after you clone it, it will transform into your gem.
+```
+$ gem install datamapper
+$ mkdir mydatadomain && cd mydatadomain
+```
 
-We'll make a new CLI named `fable` with main module name named `Fable`. 
-Do this each time you want to make a new CLI.
+Generate your flows:
 
 ```
-$ git clone https://github.com/jondot/tiny-cli-ruby-gem
-$ cd tiny-cli-ruby-gem
-$ rake provision[Fable,fable]
-$ cd ..
-$ mv tiny-cli-ruby-gem fable
+$ datamapper init myflow
+$ datamapper domain billing
+$ datamapper domain analytics
+$ datamapper domain registrations
+```
+
+And a sample flow:
+
+```
+require 'datafactory/dataflow'
+
+class Main
+  include Datafactory::Dataflow
+
+  def up
+    use :billing
+    users = create_list(:user, 20)
+
+    use :analytics
+    users.each do |user|
+      puts "creating admin user with email #{user.email}"
+      u = create(:admin, email: user.email)
+      puts u.inspect
+    end
+
+    use :registrations
+    users.each do |user|
+      puts "creating registrant user with email #{user.email}"
+      u = create(:registrant, email: user.email)
+      puts u.inspect
+    end
+  end
+
+  def down
+    use :billing
+    Billing::User.delete_all
+
+    use :analytics
+    Analytics::User.delete_all
+
+    use :registrations
+    Registrations::User.delete_all
+  end
+end
 ```
 
 Done.
@@ -26,7 +67,7 @@ Fork, implement, add tests, pull request, get my everlasting thanks and a respec
 
 ### Thanks:
 
-To all [contributors](https://github.com/jondot/tiny-cli-ruby-gem/graphs/contributors)
+To all [contributors](https://github.com/jondot/datafactory/graphs/contributors)
 
 # Copyright
 
